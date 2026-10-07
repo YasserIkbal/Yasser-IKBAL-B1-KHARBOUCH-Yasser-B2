@@ -4,7 +4,7 @@
 
 ## Besoin en une phrase (obligatoire)
 
-Répondre aux questions des étudiants sur le règlement intérieur de l'école, en citant l'article qui fonde la réponse.
+Répondre aux questisons des étudiants sur le règlement intérieur de l'école, en citant l'article qui fonde la réponse.
 ## Utilisateur final (obligatoire)
 
 L'étudiant qui cherche une règle (absences, retards, examens), et l'administration qui reçoit moins de questions répétitives.
