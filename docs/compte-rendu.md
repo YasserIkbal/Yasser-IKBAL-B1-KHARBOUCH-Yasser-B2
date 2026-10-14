@@ -57,17 +57,18 @@ classes negatifs a tort et 24 sont corrects.
 
 ## 4. L analyse des erreurs
 
-Sur 58 avis de test, 7 sont mal classes (2 faux positifs, 5 faux negatifs).
-Tous les cas d erreur proviennent d avis mitiges dont la premiere partie contredit
-la conclusion. Exemple reel observe : "Taille trop petite et retour payant au
-deballage, sauf que ensuite produit conforme a la description" est etiquete positif
-(la conclusion l emporte) mais le sac de mots compte les termes negatifs du debut
-et vote negatif. Le mecanisme est clair : TF-IDF ignore l ordre des phrases et ne
-voit pas qu une seconde proposition annule la premiere. Pour corriger cela il
-faudrait un modele de langue pre-entraine sur le francais (CamemBERT) ou des
-n-grammes de phrases, davantage d avis mixtes en entrainement, et une revue humaine
-sous le seuil de confiance.
+![Matrice de confusion](images/matrice-confusion.png)
 
+Sur 58 avis de test, 7 sont mal classes : **2 avis negatifs classes positifs** (erreur
+couteuse : des clients mecontents sont traites en retard) et **5 avis positifs classes
+negatifs** (erreur benigne : l agent perd un peu de temps sur un avis sans urgence).
+Tous les cas d erreur proviennent d avis mitiges dont la premiere partie contredit la
+conclusion : le sac de mots TF-IDF ignore l ordre des phrases et additionne les termes
+des deux parties sans voir que la seconde annule la premiere.
+Exemple reel observe : "Taille trop petite et retour payant au deballage, sauf que
+ensuite produit conforme a la description" est etiquete positif mais le modele vote
+negatif. Pour corriger cela il faudrait CamemBERT ou des n-grammes de phrases,
+davantage d avis mixtes en entrainement, et une revue humaine sous le seuil de confiance.
 ## 5. L interface et le seuil d incertitude
 
 Nous retenons le seuil de 0.60 (60 % de confiance). Sur 290 avis du jeu de

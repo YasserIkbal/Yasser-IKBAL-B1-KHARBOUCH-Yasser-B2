@@ -9,6 +9,19 @@
 
 F1 macro : **0.879** — Exactitude : **0.8793** — Rappel négatif : **0.931**
 
+![Matrice de confusion](images/matrice-confusion.png)
+
+*Figure produite par python src/plot_confusion.py — sortie console :*
+
+`
+Jeu : demo  |  58 avis de test  |  7 erreurs  |  F1 macro = 0.879
+
+Matrice de confusion (lignes = verite, colonnes = prediction)
+                negative    positive
+    negative          27           2
+    positive           5          24
+`
+
 ## Types d'erreurs observés
 
 Sur 58 avis de test, le modèle commet **7 erreurs** : 2 avis négatifs classés positifs (faux positifs), et 5 avis positifs classés négatifs (faux négatifs). Les erreurs proviennent toutes d'avis mitigés dont la première moitié contredit la conclusion : par exemple *« Taille trop petite et retour payant au déballage, sauf que ensuite produit conforme à la description »* est étiqueté positif (la conclusion l'emporte) mais le modèle sac de mots compte les mots négatifs du début, ce qui l'induit en erreur.
