@@ -1,1 +1,22 @@
 text,attendu,difficulte,erreur_connue
+"Commande reçue en deux jours, emballage soigné",POSITIVE,,
+Pas déçu du tout je recommande,POSITIVE,négation,
+Arrivé cassé bravo le transporteur,NEGATIVE,ironie,
+Le produit fonctionne parfaitement,POSITIVE,,
+Service client rapide et aimable,POSITIVE,,modèle de démonstration mal calibré sur cette formulation
+Très mauvaise qualité et finition,NEGATIVE,,modèle de démonstration mal calibré sur cette formulation
+Livraison en retard et colis abîmé,NEGATIVE,,modèle de démonstration mal calibré sur cette formulation
+Je suis ravi de cet achat,POSITIVE,,
+Je ne rachèterai jamais ce produit,NEGATIVE,négation,
+Correct sans être exceptionnel,POSITIVE,mitigé,
+La batterie tient toute la journée,POSITIVE,,
+Le tissu est fragile et se déchire,NEGATIVE,,
+Une expérience décevante du début à la fin,NEGATIVE,,
+Le café est excellent et parfumé,POSITIVE,autre-domaine,
+Le film était long mais finalement touchant,POSITIVE,mitigé,
+Le support ne répond à aucun message,NEGATIVE,,
+Simple à utiliser et très pratique,POSITIVE,,
+Quelle merveille ce téléphone qui tombe en panne,NEGATIVE,ironie,
+Le prix est élevé mais la qualité est au rendez-vous,POSITIVE,mitigé,
+Je déconseille fortement cette commande,NEGATIVE,,
+Tout est arrivé conforme et bien emballé,POSITIVE,,

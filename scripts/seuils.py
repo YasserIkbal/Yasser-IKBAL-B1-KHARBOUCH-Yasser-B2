@@ -11,7 +11,7 @@ import pandas as pd
 RACINE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RACINE / "ui"))
 
-from helpers import charger_predicteur, predire_lot
+from helpers import charger_predicteur, predire_lot  # noqa: E402  (chemin UI ajouté ci-dessus)
 
 SEUILS = [0.50, 0.60, 0.75]
 

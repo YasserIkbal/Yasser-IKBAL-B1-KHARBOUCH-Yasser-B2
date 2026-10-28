@@ -23,6 +23,60 @@ def test_demarrage_reel_charge_le_modele():
     assert "TP2" in reponse.json()["model"]
 
 
+def test_modele_absent_refuse_le_demarrage(monkeypatch):
+    from fastapi.testclient import TestClient
+
+    import api.main as main
+    from src import predict as predict_module
+
+    monkeypatch.setattr(predict_module, "MODELE", Path("fichier-inexistant.joblib"))
+    main.charger_modele.cache_clear()
+    with pytest.raises(FileNotFoundError), TestClient(main.app):
+        pass
+    main.charger_modele.cache_clear()
+
+
+def test_modele_non_charge_repond_503():
+    from fastapi.testclient import TestClient
+
+    from api.main import app
+
+    with TestClient(app) as client:
+        app.state.model = None
+        assert client.get("/health").status_code == 503
+        assert client.post("/predict", json={"text": "bonjour"}).status_code == 503
+
+
+@pytest.mark.parametrize("exception", [RuntimeError("panne"), ValueError("bug interne")])
+def test_panne_du_modele_repond_500(monkeypatch, exception):
+    from fastapi.testclient import TestClient
+
+    from api.main import app
+
+    class ModeleEnPanne:
+        def predict(self, text):
+            raise exception
+
+    with TestClient(app) as client:
+        monkeypatch.setattr(app.state, "model", ModeleEnPanne())
+        reponse = client.post("/predict", json={"text": "bonjour"})
+    assert reponse.status_code == 500
+    assert "bug interne" not in reponse.text
+
+
+def test_classes_inattendues_refusent_le_demarrage(monkeypatch):
+    from fastapi.testclient import TestClient
+
+    import api.main as main
+
+    class MauvaisModele:
+        classes_ = ["positive", "neutral"]
+
+    monkeypatch.setattr(main, "charger_modele", lambda: MauvaisModele())
+    with pytest.raises(ValueError, match="classes de modèle inattendues"), TestClient(main.app):
+        pass
+
+
 # À écrire (étape D) :
 # D.2 modèle absent : chemin du modèle redirigé (monkeypatch), cache vidé
 #     (charger_modele.cache_clear()), l'API refuse de démarrer (FileNotFoundError) ;

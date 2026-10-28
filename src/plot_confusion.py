@@ -14,6 +14,7 @@ from pathlib import Path
 
 import joblib
 import matplotlib
+
 matplotlib.use("Agg")          # pas d affichage interactif, compatible CI
 import matplotlib.pyplot as plt
 import numpy as np
@@ -100,7 +101,7 @@ def main() -> int:
     print("Matrice de confusion (lignes = verite, colonnes = prediction)")
     header = f"{'':>12}" + "".join(f"{e:>12}" for e in ETIQUETTES)
     print(header)
-    for nom, ligne in zip(ETIQUETTES, mc):
+    for nom, ligne in zip(ETIQUETTES, mc, strict=True):
         print(f"{nom:>12}" + "".join(f"{v:>12}" for v in ligne))
     print()
 
