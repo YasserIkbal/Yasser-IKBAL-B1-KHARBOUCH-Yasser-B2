@@ -33,8 +33,6 @@ Les contrôles d'environnement et de cadrage sont automatisés dans
 `tests/test_environment.py` et `tests/test_cadrage.py`. Le dépôt GitHub utilisé
 est celui du binôme indiqué en en-tête.
 
-![TP1 : structure du projet et cadrage](captures/tp1-structure-cadrage.png)
-
 ## TP2 — Entraîner et évaluer le modèle
 
 `src/make_demo.py` produit 290 avis, répartis en 145 positifs et 145 négatifs.
@@ -63,7 +61,7 @@ annule la première.
 `models/metrics.json` est versionné car il est léger et contrôle le F1. Le modèle
 `.joblib`, lourd et reconstructible, n'est pas versionné.
 
-![TP2 : entraînement et matrice de confusion](captures/tp2-entrainement-matrice.png)
+![TP2 : entraînement et matrice de confusion](captures/sctp2.png)
 
 ## TP3 — Exposer le modèle par une API
 
@@ -85,7 +83,8 @@ Le fichier `tests/test_api.py` contient les tests dédiés du TP3 : **7 passed**
 Sans `models/sentiment.joblib`, le démarrage lève `FileNotFoundError` et refuse
 de lancer l'application. La CI exécute `make_demo.py` puis `train.py` avant les tests.
 
-![TP3 : API, prédictions et erreurs 422](captures/tp3-api-predictions.png)
+![TP3 : API, prédictions et erreurs 422](captures/Screenshot 2026-10-28 114120.png)
+(captures/Sc4.png)
 
 ## TP4 — Tests approfondis et qualité
 
@@ -114,7 +113,7 @@ Mypy : Success: no issues found in 4 source files
 
 Une panne interne répond `500`, tandis qu'une requête invalide répond `422`.
 
-![TP4 : tests, couverture, Ruff et Mypy](captures/tp4-qualite.png)
+![TP4 : tests, couverture, Ruff et Mypy](captures/sc1.png)
 
 ## TP5 — Interface Streamlit
 
@@ -134,7 +133,7 @@ Tests TP5 ciblés : 12 passed
 Suite complète avant l'ajout des tests API TP3 : 89 passed, 3 xfailed
 ```
 
-![TP5 : interface Streamlit, abstention et analyse CSV](captures/tp5-interface-csv.png)
+![TP5 : interface Streamlit, abstention et analyse CSV](captures/sc2.png)
 
 ## TP6 — Packaging
 
