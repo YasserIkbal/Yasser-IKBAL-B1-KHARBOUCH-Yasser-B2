@@ -15,7 +15,7 @@ jobs:
       - name: Modèle de démonstration
         run: . .venv/bin/activate && python src/make_demo.py && python src/train.py
       - name: Outils de qualité (TP4)
-        run: . .venv/bin/activate && pip install -r requirements-dev.txt
+        run: . .venv/bin/activate && pip install -r requirements-dev.txt requests streamlit
       - name: ruff
         run: . .venv/bin/activate && ruff check .
       - name: mypy
