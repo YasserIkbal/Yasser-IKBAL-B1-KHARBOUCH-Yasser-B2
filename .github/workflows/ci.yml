@@ -24,3 +24,5 @@ jobs:
         run: . .venv/bin/activate && mypy api
       - name: Tests et couverture
         run: . .venv/bin/activate && pytest -q --cov=api --cov-report=term-missing --cov-fail-under=95
+      - name: Construire la roue
+        run: . .venv/bin/activate && pip install build && rm -rf dist && python -m build --wheel

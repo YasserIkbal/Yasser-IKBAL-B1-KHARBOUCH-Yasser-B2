@@ -1,55 +1,11 @@
-#!/usr/bin/env python
-"""Prédiction unitaire : la fonction que l'API de la semaine 3 appellera.
+"""Compatibilité historique : préférer ``sentiment_app.predict``.
 
-Usage :
-  python src/predict.py "Livraison rapide, très satisfait"
-  >>> from predict import predict ; predict("texte")
+Le module est un alias du nouveau module afin que les anciens tests qui
+modifient ``src.predict.MODELE`` continuent de modifier la même configuration.
 """
+
 import sys
-from functools import lru_cache
-from pathlib import Path
-from typing import Literal, TypedDict, cast
 
-import joblib
+from sentiment_app import predict as _implementation
 
-MODELE = Path(__file__).resolve().parents[1] / "models" / "sentiment.joblib"
-
-ModelLabel = Literal["positive", "negative"]
-
-
-class Prediction(TypedDict):
-    label: ModelLabel
-    score: float
-
-
-@lru_cache(maxsize=1)
-def charger_modele():
-    """Chargé une seule fois par processus, pas à chaque appel."""
-    if not MODELE.exists():
-        raise FileNotFoundError("models/sentiment.joblib absent : lancez python src/train.py")
-    return joblib.load(MODELE)
-
-
-def predict(texte: str) -> Prediction:
-    """Renvoie {'label': 'positive'|'negative', 'score': float}."""
-    if not isinstance(texte, str) or not texte.strip():
-        raise ValueError("texte vide")
-    pipeline = charger_modele()
-    etiquette = cast(ModelLabel, str(pipeline.predict([texte])[0]).lower())
-    if etiquette not in {"positive", "negative"}:
-        raise ValueError(f"étiquette de modèle inconnue : {etiquette}")
-    score = float(pipeline.predict_proba([texte]).max())
-    return {"label": etiquette, "score": round(score, 4)}
-
-
-def main() -> int:
-    if len(sys.argv) < 2:
-        print(__doc__)
-        return 2
-    resultat = predict(" ".join(sys.argv[1:]))
-    print(f"{resultat['label']} (confiance {resultat['score']:.0%})")
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+sys.modules[__name__] = _implementation

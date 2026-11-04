@@ -1,7 +1,7 @@
 from typing import Literal, TypedDict
 
 from api.schemas import Label
-from src.predict import ModelLabel, Prediction, predict
+from sentiment_app.predict import ModelLabel, Prediction, predict
 
 SEUIL_ABSTENTION = 0.60
 ETIQUETTES_CONTRAT: dict[ModelLabel, Label] = {

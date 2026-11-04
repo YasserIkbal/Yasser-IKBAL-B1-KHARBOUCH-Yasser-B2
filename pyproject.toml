@@ -1,4 +1,29 @@
-# Configuration des outils de qualité (TP4). Le packaging (TP6) complétera ce fichier.
+[build-system]
+requires = ["setuptools>=68", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sentiment-app"
+version = "0.6.0"
+description = "Application installable d'analyse de sentiment"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "joblib>=1.4,<1.5",
+    "scikit-learn>=1.5,<1.6",
+    "fastapi>=0.115,<0.116",
+    "uvicorn>=0.30,<0.31",
+    "pydantic>=2.9,<2.10",
+    "requests>=2.32,<2.33",
+    "streamlit>=1.39,<1.40",
+]
+
+[project.scripts]
+sentiment = "sentiment_app.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["sentiment_app*", "api*", "ui*"]
+
+# Configuration des outils de qualité (TP4).
 
 [tool.ruff]
 target-version = "py311"

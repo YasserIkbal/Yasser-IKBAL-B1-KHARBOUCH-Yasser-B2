@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException
 
 from api.model import SentimentClassifier, verifier_classes
 from api.schemas import PredictRequest, PredictResponse
-from src.predict import charger_modele
+from sentiment_app.predict import charger_modele
 
 
 @asynccontextmanager
