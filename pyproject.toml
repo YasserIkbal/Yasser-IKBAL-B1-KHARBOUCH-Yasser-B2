@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sentiment-app"
+version = "0.6.0"
+description = "Application installable d'analyse de sentiment"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "joblib>=1.4,<1.5",
+    "scikit-learn>=1.5,<1.6",
+    "fastapi>=0.115,<0.116",
+    "uvicorn>=0.30,<0.31",
+    "pydantic>=2.9,<2.10",
+    "requests>=2.32,<2.33",
+    "streamlit>=1.39,<1.40",
+]
+
+[project.scripts]
+sentiment = "sentiment_app.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["sentiment_app*", "api*", "ui*"]
+
+# Configuration des outils de qualité (TP4).
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+# E4, E7, E9, F : erreurs probables ; I : ordre des imports ; B : constructions à risque
+select = ["E4", "E7", "E9", "F", "I", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+mypy_path = "src"            # pour que mypy trouve predict.py, importé par api/model.py
+check_untyped_defs = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = ["joblib", "joblib.*", "sklearn", "sklearn.*", "pandas", "pandas.*", "uvicorn", "uvicorn.*"]
+ignore_missing_imports = true
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
